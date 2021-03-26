@@ -9,7 +9,7 @@ import { IDuty } from './duty.interface';
   providedIn: 'root'
 })
 export class DutyService {
-  apiURL = '';
+  apiURL = 'http://localhost:9001/duties';
   
   constructor(private http: HttpClient) { }
 
@@ -30,7 +30,7 @@ export class DutyService {
   }
 
   // HttpClient API get() method => Fetch duty
-  getDuty(id: number): Observable<dutyModel> {
+  getDuty(id: string): Observable<dutyModel> {
     return this.http.get<dutyModel>(this.apiURL + '/get/' + id)
     .pipe(
       retry(1),
@@ -41,7 +41,7 @@ export class DutyService {
   // HttpClient API post() method => Create duty
   createDuty(duty: IDuty): Observable<dutyModel> {
     console.log('trying to save', JSON.stringify(duty));
-    return this.http.post<dutyModel>(this.apiURL + '/add', JSON.stringify(duty), this.httpOptions)
+    return this.http.post<dutyModel>(this.apiURL + '/addDuty', JSON.stringify(duty), this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
@@ -49,7 +49,7 @@ export class DutyService {
   }  
 
   // HttpClient API put() method => Update duty
-  updateDuty(id: number, duty: IDuty): Observable<dutyModel> {
+  updateDuty(id: string, duty: IDuty): Observable<dutyModel> {
     console.log('trying to update', id, duty);
     return this.http.put<dutyModel>(this.apiURL + '/update/' + id, JSON.stringify(duty), this.httpOptions)
     .pipe(
@@ -59,7 +59,7 @@ export class DutyService {
   }
 
   // HttpClient API delete() method => Delete duty
-  deleteDuty(id: number){
+  deleteDuty(id: string){
     return this.http.delete<dutyModel>(this.apiURL + '/delete/' + id, this.httpOptions)
     .pipe(
       retry(1),

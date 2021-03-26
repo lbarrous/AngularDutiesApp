@@ -19,13 +19,13 @@
         <div class="task-wrapper flex-wrapper" *ngFor="let item of mydutieslist">
           <div style="flex:7">
             <span [className]="item.completed ? 'finish-name' : 'name'"      
-            (click)="FinishDuty(item.id)">{{item.name}}</span>
+            (click)="FinishDuty(item._id)">{{item.name}}</span>
           </div>
           <div style="flex:1">
-            <button class="btn btn-sm btn-outline-info edit" (click)="Edit(item.id)">Edit </button>
+            <button class="btn btn-sm btn-outline-info edit" (click)="Edit(item._id)">Edit </button>
           </div>
           <div style="flex:1">
-            <button class="btn btn-sm btn-outline-danger delete" (click)="Delete(item.id)">Delete</button>
+            <button class="btn btn-sm btn-outline-danger delete" (click)="Delete(item._id)">Delete</button>
           </div>
         </div>
       </div>
