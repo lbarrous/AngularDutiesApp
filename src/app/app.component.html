@@ -1,1 +1,33 @@
-<router-outlet></router-outlet>
+<!-- <router-outlet></router-outlet> -->
+
+<div class="container">
+  <div id="task-container">
+      <div id="form-wrapper">
+          <form id="form" (ngSubmit)="onSubmit()" #dutyForm="ngForm">    
+                  <div class="flex-wrapper">
+                    <div style="flex: 6">                      
+                      <input type="text" class="form-control" id="name" required [(ngModel)]="myDuty.name" name="name"
+                      #title="ngModel">
+                    </div>            
+                    <div style="flex: 1">
+                      <button type="submit" id="submit" class="btn">Submit</button>     
+                    </div>      
+                  </div>                     
+          </form>
+      </div>
+      <div id="list-wrapper">
+        <div class="task-wrapper flex-wrapper" *ngFor="let item of mydutieslist">
+          <div style="flex:7">
+            <span [className]="item.completed ? 'finish-name' : 'name'"      
+            (click)="FinishDuty(item.id)">{{item.name}}</span>
+          </div>
+          <div style="flex:1">
+            <button class="btn btn-sm btn-outline-info edit" (click)="Edit(item.id)">Edit </button>
+          </div>
+          <div style="flex:1">
+            <button class="btn btn-sm btn-outline-danger delete" (click)="Delete(item.id)">Delete</button>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
